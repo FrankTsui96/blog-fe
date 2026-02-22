@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 const modules = [
   {
@@ -29,29 +28,18 @@ export function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background">
-      <div className="container px-4 py-16">
-        <div className="mx-auto max-w-4xl">
-          <div className="grid gap-6 sm:grid-cols-2">
-            {modules.map((module) => (
-              <Card
-                key={module.path}
-                className="cursor-pointer transition-all hover:shadow-lg"
-                onClick={() => navigate(module.path)}
-              >
-                <CardHeader>
-                  <CardTitle className="text-2xl">{module.title}</CardTitle>
-                  <CardDescription className="text-base">{module.description}</CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
+    <div className="flex min-h-screen flex-col justify-center bg-background px-0 py-0 md:py-40">
+      <div className="w-full flex-1 grid grid-cols-1 md:grid-cols-2">
+        {modules.map((module) => (
+          <div
+            key={module.path}
+            className="flex cursor-pointer flex-col justify-center border-b p-12 transition-colors hover:bg-accent md:border-r"
+            onClick={() => navigate(module.path)}
+          >
+            <h2 className="text-2xl font-bold">{module.title}</h2>
+            <p className="mt-2 text-muted-foreground">{module.description}</p>
           </div>
-          <div className="mt-12 flex justify-center">
-            <Button variant="outline" size="lg" disabled>
-              社交媒体链接
-            </Button>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
