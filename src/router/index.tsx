@@ -1,6 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import App from '../App';
-import Demo from '../pages/Demo';
+import { Layout } from '@/components/Layout';
+import { HomePage } from '@/pages/HomePage';
+import { TechPage } from '@/pages/TechPage';
+import { LifePage } from '@/pages/LifePage';
+import { SightPage } from '@/pages/SightPage';
+import { HanziPage } from '@/pages/HanziPage';
 
 /**
  * 路由配置
@@ -11,24 +15,29 @@ import Demo from '../pages/Demo';
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <HomePage />,
   },
-  // 添加更多路由配置示例：
   {
-    path: '/demo',
-    element: <Demo />,
+    element: <Layout />,
+    children: [
+      {
+        path: '/tech',
+        element: <TechPage />,
+      },
+      {
+        path: '/life',
+        element: <LifePage />,
+      },
+      {
+        path: '/sight',
+        element: <SightPage />,
+      },
+      {
+        path: '/hanzi',
+        element: <HanziPage />,
+      },
+    ],
   },
-  // {
-  //   path: '/users/:id',
-  //   element: <UserDetail />,
-  //   loader: async ({ params }) => {
-  //     return fetch(`/api/users/${params.id}`);
-  //   },
-  // },
-  // {
-  //   path: '*',
-  //   element: <NotFound />,
-  // },
 ]);
 
 export default router;

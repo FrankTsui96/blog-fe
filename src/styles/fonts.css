@@ -1,0 +1,27 @@
+/* Noto Serif SC */
+/* Noto Serif TC */
+
+/* Noto Sans SC */
+/* Noto Sans TC */
+
+/* Noto Sans */
+/* Gelasio 英文标题 */
+/* Lora 英文正文 */
+/* JetBrains Mono 代码 */
+
+html {
+  font-family: "Lora", "Noto Serif SC", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Gelasio", "Noto Serif SC", serif;
+}
+
+code {
+  font-family: "JetBrains Mono", "Noto Sans SC", monospace;
+}
