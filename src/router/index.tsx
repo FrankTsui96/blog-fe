@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Layout } from '@/components/Layout';
-import { HomePage } from '@/pages/HomePage';
-import { TechPage } from '@/pages/TechPage';
-import { LifePage } from '@/pages/LifePage';
-import { SightPage } from '@/pages/SightPage';
-import { HanziPage } from '@/pages/HanziPage';
+import { Layout } from '@/components/layout/Layout';
+import { HomePage } from '@/pages/Home';
+import { TechPage, TechDetailPage } from '@/pages/Tech';
+import { LifePage, LifeDetailPage } from '@/pages/Life';
+import { SightPage, SightDetailPage } from '@/pages/Sight';
+import { HanziPage, HanziDetailPage } from '@/pages/Hanzi';
 
 /**
  * 路由配置
@@ -25,16 +25,32 @@ export const router = createBrowserRouter([
         element: <TechPage />,
       },
       {
+        path: '/tech/:id',
+        element: <TechDetailPage />,
+      },
+      {
         path: '/life',
         element: <LifePage />,
+      },
+      {
+        path: '/life/:id',
+        element: <LifeDetailPage />,
       },
       {
         path: '/sight',
         element: <SightPage />,
       },
       {
+        path: '/sight/:id',
+        element: <SightDetailPage />,
+      },
+      {
         path: '/hanzi',
         element: <HanziPage />,
+      },
+      {
+        path: '/hanzi/:id',
+        element: <HanziDetailPage />,
       },
     ],
   },

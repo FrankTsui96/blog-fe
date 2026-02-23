@@ -20,9 +20,6 @@ const api: KyInstance = ky.create({
           request.headers.set('Authorization', `Bearer ${token}`);
         }
 
-        console.log('DEV', import.meta.env);
-        console.log('API_BASE_URL', API_BASE_URL);
-
         // 开发环境下打印请求信息
         if (import.meta.env.DEV) {
           console.log('→', request.method, request.url);

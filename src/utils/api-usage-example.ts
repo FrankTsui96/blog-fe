@@ -5,7 +5,7 @@
  * 实际使用时可以删除此文件
  */
 
-import apiClient from './api';
+import apiClient from '../lib/api';
 
 // ============================================
 // 1. 基础使用示例

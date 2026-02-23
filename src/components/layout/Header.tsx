@@ -20,7 +20,7 @@ export function Header() {
   const { setTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container flex h-14 items-center">
         <div className="mr-4 flex">
           <Link to="/" className="mr-6 flex items-center space-x-2">
@@ -34,7 +34,7 @@ export function Header() {
               <Link
                 key={item.path}
                 to={item.path}
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className="text-sm font-medium transition-all duration-300 hover:text-primary hover:font-bold"
               >
                 {item.name}
               </Link>
