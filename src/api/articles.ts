@@ -1,5 +1,5 @@
 import { apiClient } from '@/lib/api';
-import type { ArticleType } from '@/types';
+import { ArticleType } from '@/constants';
 import type { PaginatedResponse } from './types';
 
 /** 创建文章 Input */
