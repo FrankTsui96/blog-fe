@@ -1,10 +1,99 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { Layout } from '@/components/layout/Layout';
-import { HomePage } from '@/pages/Home';
-import { TechPage, TechDetailPage } from '@/pages/Tech';
-import { LifePage, LifeDetailPage } from '@/pages/Life';
-import { SightPage, SightDetailPage } from '@/pages/Sight';
-import { HanziPage, HanziDetailPage } from '@/pages/Hanzi';
+import { lazy } from 'react';
+import { createBrowserRouter, type RouteObject } from 'react-router-dom';
+import { getRouterData } from './utils';
+
+/**
+ * 客户端
+ */
+const ClientLayout = lazy(() => import('@/layouts/client/Layout'));
+const Home = lazy(() => import('@/pages/client/Home/Home'));
+const Tech = lazy(() => import('@/pages/client/tech/Tech'));
+const TechDetail = lazy(() => import('@/pages/client/tech/TechDetail'));
+const Life = lazy(() => import('@/pages/client/life/Life'));
+const LifeDetail = lazy(() => import('@/pages/client/life/LifeDetail'));
+const Sight = lazy(() => import('@/pages/client/sight/Sight'));
+const SightDetail = lazy(() => import('@/pages/client/sight/SightDetail'));
+const Hanzi = lazy(() => import('@/pages/client/hanzi/Hanzi'));
+const HanziDetail = lazy(() => import('@/pages/client/hanzi/HanziDetail'));
+
+/**
+ * 管理端
+ */
+const AdminLayout = lazy(() => import('@/layouts/admin/Layout'));
+const Console = lazy(() => import('@/pages/admin/Console'));
+const Login = lazy(() => import('@/pages/admin/Login'));
+const Articles = lazy(() => import('@/pages/admin/articles/Articles'));
+
+/**
+ * 路由数据
+ */
+const routerData: RouteObject[] = [
+  /**
+   * 客户端路由
+   */
+  {
+    path: '/',
+    element: <Home />,
+  },
+  {
+    element: <ClientLayout />,
+    children: [
+      {
+        path: '/tech',
+        element: <Tech />,
+      },
+      {
+        path: '/tech/:slug',
+        element: <TechDetail />,
+      },
+      {
+        path: '/life',
+        element: <Life />,
+      },
+      {
+        path: '/life/:slug',
+        element: <LifeDetail />,
+      },
+      {
+        path: '/sight',
+        element: <Sight />,
+      },
+      {
+        path: '/sight/:slug',
+        element: <SightDetail />,
+      },
+      {
+        path: '/hanzi',
+        element: <Hanzi />,
+      },
+      {
+        path: '/hanzi/:slug',
+        element: <HanziDetail />,
+      },
+    ],
+  },
+  /**
+   * 管理端路由
+   */
+  {
+    path: '/admin/login',
+    element: <Login />,
+  },
+  {
+    path: '/admin',
+    element: <AdminLayout />,
+    children: [
+      {
+        index: true,
+        element: <Console />,
+      },
+      {
+        path: 'articles',
+        element: <Articles />,
+      },
+    ],
+  },
+];
 
 /**
  * 路由配置
@@ -12,48 +101,6 @@ import { HanziPage, HanziDetailPage } from '@/pages/Hanzi';
  * 使用 React Router v7 的 createBrowserRouter
  * 支持 loader、action 等新特性
  */
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <HomePage />,
-  },
-  {
-    element: <Layout />,
-    children: [
-      {
-        path: '/tech',
-        element: <TechPage />,
-      },
-      {
-        path: '/tech/:id',
-        element: <TechDetailPage />,
-      },
-      {
-        path: '/life',
-        element: <LifePage />,
-      },
-      {
-        path: '/life/:id',
-        element: <LifeDetailPage />,
-      },
-      {
-        path: '/sight',
-        element: <SightPage />,
-      },
-      {
-        path: '/sight/:id',
-        element: <SightDetailPage />,
-      },
-      {
-        path: '/hanzi',
-        element: <HanziPage />,
-      },
-      {
-        path: '/hanzi/:id',
-        element: <HanziDetailPage />,
-      },
-    ],
-  },
-]);
+export const router = createBrowserRouter(getRouterData(routerData));
 
 export default router;

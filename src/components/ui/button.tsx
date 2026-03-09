@@ -64,4 +64,4 @@ function Button({
   );
 }
 
-export { Button, buttonVariants as ButtonVariants };
+export { Button, buttonVariants };

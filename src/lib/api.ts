@@ -1,4 +1,6 @@
 import ky, { type KyInstance, type Options } from 'ky';
+import { router } from '@/router';
+import { toast } from 'sonner';
 
 // API 基础配置
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
@@ -36,25 +38,40 @@ const api: KyInstance = ky.create({
       },
     ],
     beforeError: [
-      (error) => {
+      async (error) => {
         const { response } = error;
 
+        // 物理网络错误（如断网）处理
+        if (!response) {
+          toast.error('网络连接异常，请检查网络');
+          return error;
+        }
+
+        const resData = await response.json<ApiResponse>();
+        // 将解析后的数据挂载到 error 对象上，供页面 catch 使用
+        (error as any).data = resData;
+
         // 处理常见的 HTTP 错误
-        if (response) {
-          switch (response.status) {
+        if (resData) {
+          switch (resData.code) {
             case 401:
-              // 未授权，清除 token 并跳转到登录页
-              localStorage.removeItem('token');
-              window.location.href = '/login';
+              {
+                const isLoginApi = response.url?.includes('/auth/login');
+                if (!isLoginApi) {
+                  // 未授权，清除 token 并跳转到登录页
+                  localStorage.removeItem('token');
+                  router.navigate('/admin/login', { replace: true });
+                }
+              }
               break;
             case 403:
-              console.error('无权限访问');
+              toast.error('无权限访问');
               break;
             case 404:
-              console.error('请求的资源不存在');
+              toast.error('请求的资源不存在');
               break;
             case 500:
-              console.error('服务器错误');
+              toast.error('服务器错误');
               break;
           }
         }
