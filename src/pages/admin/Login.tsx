@@ -41,8 +41,8 @@ export default function Login() {
         toast.success('登录成功');
         navigate('/admin/articles');
       }
-    } catch (error) {
-      console.log(error, typeof error);
+    } catch (error: any) {
+      console.error(error.data.message);
     }
   }
 

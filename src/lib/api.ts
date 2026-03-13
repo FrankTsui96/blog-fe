@@ -58,9 +58,12 @@ const api: KyInstance = ky.create({
               {
                 const isLoginApi = response.url?.includes('/auth/login');
                 if (!isLoginApi) {
+                  toast.error('登录过期，请重新登录');
                   // 未授权，清除 token 并跳转到登录页
                   localStorage.removeItem('token');
                   router.navigate('/admin/login', { replace: true });
+                } else {
+                  toast.error('登录失败，请检查邮箱和密码');
                 }
               }
               break;
@@ -72,6 +75,9 @@ const api: KyInstance = ky.create({
               break;
             case 500:
               toast.error('服务器错误');
+              break;
+            default:
+              toast.error(resData.message || '请求失败');
               break;
           }
         }

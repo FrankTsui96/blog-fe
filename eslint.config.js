@@ -41,5 +41,14 @@ export default defineConfig([
         { allowConstantExport: true },
       ],
     },
+  },
+  {
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      'react-hooks/purity': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+    },
   }
 ]);

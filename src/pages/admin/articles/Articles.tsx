@@ -11,15 +11,15 @@ import { DataTable } from '@/components/common/DataTable';
 const columns: ColumnDef<ArticleRecord>[] = [
   {
     accessorKey: 'title',
-    header: 'Title',
+    header: '文章标题',
   },
   {
     accessorKey: 'subtitle',
-    header: 'Subtitle',
+    header: '文章副标题',
   },
   {
     accessorKey: 'type',
-    header: 'Type',
+    header: '文章类型',
   },
 ];
 
@@ -36,12 +36,9 @@ export default function Articles() {
       });
       if (res.code === 200) {
         toast.success('创建文章成功');
-      } else {
-        toast.error(res.message);
       }
     } catch (error: any) {
-      const resData = error.data;
-      toast.error(resData.message);
+      console.error(error.data.message);
     }
   };
 
