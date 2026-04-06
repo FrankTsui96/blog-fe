@@ -1,0 +1,39 @@
+name: Deploy Frontend to Alibaba Cloud
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to Alibaba Cloud ACR
+        uses: docker/login-action@v3
+        with:
+          registry: crpi-xga1c7tdwvfzydbb.cn-hangzhou.personal.cr.aliyuncs.com
+          username: ${{ secrets.ALIBABA_USERNAME }}
+          password: ${{ secrets.ALIBABA_PASSWORD }}
+
+      - name: Build and Push Frontend
+        run: |
+          docker build -t crpi-xga1c7tdwvfzydbb.cn-hangzhou.personal.cr.aliyuncs.com/franktsui96/blog-fe:latest .
+          docker push crpi-xga1c7tdwvfzydbb.cn-hangzhou.personal.cr.aliyuncs.com/franktsui96/blog-fe:latest
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/ubuntu/blog-app
+            # 登录 ACR
+            echo "${{ secrets.ALIBABA_PASSWORD }}" | docker login crpi-xga1c7tdwvfzydbb.cn-hangzhou.personal.cr.aliyuncs.com -u "${{ secrets.ALIBABA_USERNAME }}" --password-stdin
+
+            # 只拉取和启动前端
+            docker compose pull frontend
+            docker compose up -d frontend

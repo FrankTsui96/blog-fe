@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sqlite3:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s \"http://localhost:3000\")",
+      "Bash(curl -s \"http://localhost:3001\")",
+      "Bash(curl -s \"http://localhost:3001/api/items?page=1\")",
+      "Bash(curl:*)",
+      "Bash(xargs kill:*)",
+      "Bash(npx shadcn@latest:*)",
+      "Bash(kill 30781)",
+      "Bash(node:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm build:*)"
+    ]
+  }
+}
