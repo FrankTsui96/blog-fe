@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@bprogress/next/app";
 import { cn } from "@/lib/utils";
 import { HomeModuleCard, type HomeModuleItem } from "@/components/home/HomeModuleCard";
 
