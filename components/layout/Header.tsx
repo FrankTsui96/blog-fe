@@ -26,16 +26,20 @@ export function Header() {
             className="h-full w-full"
           />
         </Link>
-        <div className="flex flex-1 items-center justify-end gap-4">
-          <nav className="flex items-center">
+        <div className="flex h-full flex-1 items-center justify-end gap-4">
+          <nav className="flex h-full items-center">
             {NavItems.map((item) => (
-              <Link
+              <div
                 key={item.path}
-                href={item.path}
-                className="hover:text-primary p-2 font-semibold transition-all duration-500 not-last:mr-2 hover:scale-102"
+                className="group/nav-items relative h-full transition-colors duration-400"
               >
-                {item.name}
-              </Link>
+                <Link
+                  href={item.path}
+                  className="group-hover/nav-items:bg-foreground group-hover/nav-items:text-primary-foreground flex h-full items-center pr-4 pl-4 font-semibold transition-all duration-500 group-hover/nav-items:-skew-x-6"
+                >
+                  {item.name}
+                </Link>
+              </div>
             ))}
           </nav>
           <ThemeSelect />

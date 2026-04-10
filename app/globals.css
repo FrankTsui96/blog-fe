@@ -43,10 +43,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-  /* 默认生成的是下面这一行，报错，修改为上面这一行 */
-  /*--font-mono: var(--font-geist-mono);*/
+  --font-lora: "Lora";
+  --font-noto-serif: "Noto Serif SC";
+  --font-jet-brains-mono: "JetBrains Mono";
+  --font-noto-sans: "Noto Sans SC";
+  --font-sans: var(--font-lora), var(--font-noto-serif), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jet-brains-mono), var(--font-noto-sans), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -119,10 +121,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  /* 前两个是自定义的，后面是 tailwind 的默认字体 */
-  --font-sans: "Lora", "Noto Serif SC", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  /* 同上 */
-  --font-mono: "JetBrains Mono", "Noto Sans SC", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 .dark {
@@ -180,4 +178,3 @@
 .no-spinner {
   -moz-appearance: textfield;
 }
-

@@ -3,6 +3,11 @@
 import { motion, type Variants } from "motion/react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Framer Motion 需要知道起止值的具体数值才能做渐变插值；
+ * 它能解析 #fff，但 var(--accent) 是浏览器运行时才解析的，Framer Motion 看不到实际颜色值，所以只能直接跳变（snap）；
+ * 因此把背景色渐变动画放在 className hover 里，不使用 Variants
+ */
 const cardVariants: Variants = {
   initial: {},
   hovered: {},
